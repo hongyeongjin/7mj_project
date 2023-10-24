@@ -47,7 +47,9 @@ let moviecard = movie => {
 	let poster = document.createElement('img')
 	poster.classList.add('poster')
 	poster.src = 'https://image.tmdb.org/t/p/original'+movie.poster_path
-	poster.addEventListener('click',() => window.open('https://www.themoviedb.org/movie/'+movie.id,'_blank'))
+	poster.onclick = () => {
+		let w = window.open('index2.html?id='+movie.id);
+	}
 	card.appendChild(poster)
 	
 	let illu = document.createElement('div')
@@ -57,7 +59,7 @@ let moviecard = movie => {
 	title.classList.add('title')
 	title.textContent = movie.title
 	title.style.display = 'inline-block'
-	title.addEventListener('click',() => window.open('https://www.themoviedb.org/movie/'+movie.id,'_blank'))
+	title.addEventListener('click',() => poster.click())
 	illu.appendChild(title)
 	
 	let year_genre = document.createElement('p')

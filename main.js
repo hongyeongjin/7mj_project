@@ -47,7 +47,9 @@ let moviecard = movie => {
 	let poster = document.createElement('img')
 	poster.classList.add('poster')
 	poster.src = 'https://image.tmdb.org/t/p/original'+movie.poster_path
-	poster.addEventListener('click',() => window.open('https://www.themoviedb.org/movie/'+movie.id,'_blank'))
+	poster.onclick = () => {
+		let w = window.open('index2.html?id='+movie.id);
+	}
 	card.appendChild(poster)
 	
 	let illu = document.createElement('div')
@@ -57,7 +59,7 @@ let moviecard = movie => {
 	title.classList.add('title')
 	title.textContent = movie.title
 	title.style.display = 'inline-block'
-	title.addEventListener('click',() => window.open('https://www.themoviedb.org/movie/'+movie.id,'_blank'))
+	title.addEventListener('click',() => poster.click())
 	illu.appendChild(title)
 	
 	let year_genre = document.createElement('p')
@@ -183,23 +185,20 @@ async function main2(){
 		if(event.key=="Enter") searchBtn.click()
 	})
 
-fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=', options)
-	.then(response => response.json())
-	.then(data => console.log(data))
-	.catch(err => console.error(err));
-
 	// 영화 상세정보
 	const movieInf = document.getElementById('movieInformation'); 
 
 	const moviePost = document.createElement("div"); // 영화 포스터 div
+	moviePost.style.backgroundColor = 'green';
 	moviePost.id = "movie_post";
 	moviePost.innerHTML=`
-	<img src=></img>`
+	<img src='https://image.tmdb.org/t/p/original${movie.poster_path}'></img>
+	<p>"가나다라"</p>`
 
 	const movieTitle = document.createElement("div"); // 영화 세부내용 div
 	movieTitle.id = "movie_title";
 
-	//movieInf.append(moviePost, movieTitle); // movieInf 안에 moviepost, movietitle div를 만듬
+	movieInf.append(moviePost, movieTitle); // movieInf 안에 moviepost, movietitle div를 만듬
 
 
 }

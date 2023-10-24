@@ -1,0 +1,131 @@
+*{
+	font-family: 돋움;
+}
+
+html, body{
+	margin: 0 auto;
+	padding: 0;
+	min-width: 600px;
+	max-width: 1000px;
+}
+
+#searchBar{
+	background-color: skyblue;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	height: 50px;
+}
+
+#keyword{
+	width: 250px;
+	height: 25px;
+	margin-left: 15px;
+	margin-right: 5px;
+}
+
+button{
+	margin-left: 10px;
+	height: 25px;
+	background-color: transparent;
+	border: 1px solid black;
+	border-radius: 5px;
+	font-weight: bold;
+}
+
+#advancedBtn{
+	color: navy;
+}
+
+#searchBtn{
+	color: purple;
+}
+
+button:hover{
+	background-color: orange;
+	color: white;
+}
+
+#advanced{
+	background-color: pink;
+	display: none;
+	grid-template-columns: repeat(7, 1fr);
+	flex-direction: row;
+	padding: 5px 0;
+	height: 90px;
+}
+
+#message{
+	background-color: black;
+	text-align: center;
+	color: white;
+	height: 30px;
+	padding-top: 5px;
+}
+
+#pageBar{
+	margin-top: 5px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	height: 30px;
+}
+
+#curPage, #totalPage{
+	display: inline-block;
+	text-align: center;
+	width: 30px;
+}
+
+#cards{
+	padding: 7px 10px 10px 10px;
+}
+
+.card{
+	height: 96px;
+	margin-top: 10px;
+	display: none;
+	flex-direction: row;
+	border: 1px solid black;
+	border-radius: 3px;
+	overflow: hidden;
+}
+
+p{
+	margin: 2px;
+}
+
+.poster{
+	width: 64px;
+	height: 96px;
+	margin-right: 10px;
+	cursor: pointer;
+}
+
+.illustration{
+	padding: 3px;
+}
+
+.title{
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.title:hover{
+	color: gray;
+}
+
+.year{
+	font-size: 12px;
+}
+
+.rating{
+	font-size: 12px;
+}
+
+.overview{
+	margin-left: 3px;
+	font-size: 9px;
+}

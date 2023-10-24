@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>DB JARA</title>
+</head>
+<body>
+	<div id="searchBar">
+		<label style="font-family:궁서" for="keyword">DB JARA</label>
+		<input id="keyword" type="text" placeholder="검색할 영화 제목">
+		<button id="advancedBtn">장르별 검색▽</button>
+		<button id="searchBtn">찾기</button>
+	</div>
+	<div id="advanced"></div>
+	<div id="message"></div>
+	<div id="pageBar">
+		<button id="prevPage">◀</button>
+		<p id="curPage"></p>
+		<!--<input id="curPage" type="number" min="1">-->
+		/
+		<p id="totalPage"></p>
+		<button id="nextPage">▶</button>
+	</div>
+	<div id="cards"></div>
+	<script src="main.js"></script>
+</body>
+</html>

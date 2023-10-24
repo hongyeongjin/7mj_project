@@ -21,31 +21,50 @@ const db = getFirestore(app);
 // addEventListner 넣어줄 변수들
 const $postingBtn = document.querySelector("#postingBtn");
 const $comment = document.querySelector("#comment");
-console.log($comment.value)
 
 
 // 댓글 firebase에 저장
-// $postingBtn.addEventListener("click", addComment);
+$postingBtn.addEventListener("click", addComment);
 
 async function addComment() {
-    let doc = {
-        "comment" : $comment.value,
+    // localstorage에 데이터 넣기
+    let localName = localStorage.getItem('userName')
+    if(localName == undefined){
+        localName = prompt("성함을 입력해주세요")
+        localStorage.setItem("userName", localName)
     }
-    await addDoc(collection(db,"comment"),doc);
-    alert('저장 완료!');
-    // getComment();
+
+    localStorage.setItem("comment",$comment.value);
+
+    let password = prompt("비밀번호를 입력해주세요")
+    if(password){
+        let doc = {
+            "id" : localName,
+            "password" : password,
+            "comment" : $comment.value,
+        }
+        await addDoc(collection(db,"comment"),doc);
+        localStorage.setItem("password",password);
+        alert('저장되었습니다');
+    }
+    
+    getComment();
 }
 
 // firebase에서 댓글 가져와서 출력
 async function getComment() {
     const docs = await getDocs(collection(db,"comment"));
-    console.log(docs)
+    
     docs.forEach((doc)=>{
         const data = doc.data();
-        console.log(data)
+        const $commentBox = document.createElement("div");
+        $commentBox.innerHTML = `
+        <li>작성자: ${data["id"]}</li>
+        <li>댓글 : ${data["comment"]}</li>`
+
     });
 }
-// getComment();
+
 
 
 //Local stroage에 input text 넣기
@@ -53,6 +72,11 @@ $postingBtn.addEventListener("click", addLocalstorage);
 
 function addLocalstorage() {
     const commentValue = $comment.value;
+    let localName = localStorage.getItem('userName')
+    if(localName == undefined){
+        localName = prompt("성함을 입력해주세요")
+        localStorage.setItem("userName", localName)
+    }
     localStorage.setItem("comment",commentValue);
     getLoaclstorage();
 }

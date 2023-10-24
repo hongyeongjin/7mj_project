@@ -184,6 +184,23 @@ async function main2(){
 	keyword.addEventListener('keypress', event => {
 		if(event.key=="Enter") searchBtn.click()
 	})
+
+	// 영화 상세정보
+	const movieInf = document.getElementById('movieInformation'); 
+
+	const moviePost = document.createElement("div"); // 영화 포스터 div
+	moviePost.style.backgroundColor = 'green';
+	moviePost.id = "movie_post";
+	moviePost.innerHTML=`
+	<img src='https://image.tmdb.org/t/p/original${movie.poster_path}'></img>
+	<p>"가나다라"</p>`
+
+	const movieTitle = document.createElement("div"); // 영화 세부내용 div
+	movieTitle.id = "movie_title";
+
+	movieInf.append(moviePost, movieTitle); // movieInf 안에 moviepost, movietitle div를 만듬
+
+
 }
 
 main2()

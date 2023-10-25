@@ -7,7 +7,7 @@ const options = {
     }
   };
   export async function scrape_image(id) {
-  fetch(`https://api.themoviedb.org/3/movie/${id}/images`, options)
+  return await fetch(`https://api.themoviedb.org/3/movie/${id}/images`, options)
     .then(response => response.json())
     .then(response => response.backdrops[0].file_path)
     .catch(err => console.error(err));

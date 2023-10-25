@@ -54,7 +54,7 @@ async function addComment() {
             "id" : localName,
             "password" : password,
             "comment" : $comment.value,
-            "date" : `${year}.${month}.${date} ${hours}:${minutes}`,
+            "date" : `${year}.${month}.${date} ${String(hours).padStart(2,"0")}:${String(minutes).padStart(2,"0")}`,
         }
         await addDoc(collection(db,"comment"),doc);
         localStorage.setItem("password",password);
@@ -65,14 +65,15 @@ async function addComment() {
     getComment();
 }
 
-let r = 0
+
 // firebase에서 댓글 가져와서 출력
 async function getComment() {
+    const $movieComment = document.querySelector("#movieComment");
+    
     const docs = await getDocs(collection(db, "comment"));
 
     docs.forEach((doc) => {
-        const $movieComment = document.querySelector("#movieComment");
-
+        
         const data = doc.data();
         const $commentBox = document.createElement("div");
         $commentBox.className = "commentBox";
@@ -96,36 +97,25 @@ async function getComment() {
         }
         $movieComment.appendChild($commentBox);
 
-    
-        // 댓글 수정 리스너
-        /* const $editBtns = document.querySelectorAll("#editBtn")
-        $editBtns.forEach((editBtn)=>{
-            editBtn.addEventListener("click",editComment);
-        }) */
-
         // 댓글 삭제 함수
-		
-        /* const $deleteBtns = document.querySelectorAll("#deleteBtn");
-        $deleteBtns.forEach((comment) => {
-            comment.addEventListener("click", deleteComment);
-        }); */
-        // $deleteComment.addEventListener("click", deleteComment);
-
         function deleteComment() {
-            // const li = event.target.parentElement;
             let checkingPW = prompt("비밀번호를 입력해주세요");
             if (data["password"] === checkingPW) {
                 $commentBox.remove();
-                console.log($commentBox)
+                console.log("테스트")
                 localStorage.removeItem("comment")
-                // await deleteDoc(doc(db,"comment",id))
+                localStorage.removeItem("password")
                 alert("삭제되었습니다");
+                // await deleteDoc(doc(db,"comment",id))
+
             } else {
                 alert("올바르지 않은 비밀번호 입니다.");
             }
         }
     })
-;}
+    $commentBox.style.display = "none";
+};
+getComment();
 
 // 댓글 수정함수
 function editComment() {

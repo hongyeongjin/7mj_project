@@ -65,6 +65,7 @@ async function addComment() {
     getComment();
 }
 
+let r = 0
 // firebase에서 댓글 가져와서 출력
 async function getComment() {
     const docs = await getDocs(collection(db, "comment"));
@@ -89,22 +90,25 @@ async function getComment() {
             <button id ="editBtn">수정</button>
             <button id="deleteBtn">삭제</button>
             `;
+			$temp.children[0].addEventListener("click", editComment);
+			$temp.children[1].addEventListener("click", deleteComment);
             $commentBox.append($temp);
         }
         $movieComment.appendChild($commentBox);
 
     
         // 댓글 수정 리스너
-        const $editBtns = document.querySelectorAll("#editBtn")
+        /* const $editBtns = document.querySelectorAll("#editBtn")
         $editBtns.forEach((editBtn)=>{
             editBtn.addEventListener("click",editComment);
-        })
+        }) */
 
         // 댓글 삭제 함수
-        const $deleteBtns = document.querySelectorAll("#deleteBtn");
+		
+        /* const $deleteBtns = document.querySelectorAll("#deleteBtn");
         $deleteBtns.forEach((comment) => {
             comment.addEventListener("click", deleteComment);
-        });
+        }); */
         // $deleteComment.addEventListener("click", deleteComment);
 
         async function deleteComment() {

@@ -33,4 +33,6 @@ async function main(){
 	}).join('')
 }
 
+	document.querySelector(".")
+
 main()

@@ -10,6 +10,6 @@ const options = {
 export async function scrape_trailer(id){
 	return await fetch(`https://api.themoviedb.org/3/movie/${id}/videos?language=en-US`, options)
 		.then(res => res.json())
-	    .then(res => res.results[0].key)
+	    .then(res => res.backdrops[0].file_path)
 	    .catch(err => console.error(err));
 }

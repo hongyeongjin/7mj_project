@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 import {scrape_trailer} from './trailer.js'
 import {scrape_image} from './image.js'
+=======
+import {options, scrape_trailer} from './trailer.js'
+>>>>>>> 88b8af0974076471cdf1090fc76a2ab9f6edabc8
 
 const queryString = window.location.search
 // console.log(queryString)
@@ -10,7 +14,21 @@ const id = urlParams.get('id')
 const movieId = urlParams.get('id') // 해당 id값은 잘 가져온다.
 console.log(movieId)
 
+async function movieCast(id){
+	return fetch(`https://api.themoviedb.org/3/movie/${id}/credits?language=en-US`, options)
+	  .then(res => res.json())
+	  .then(res => res.cast)
+	  .catch(err => console.error(err));
+}
+
 async function main2(){
+	// 출연진 불러오기
+	let movieInfo = document.getElementById('movieInformation')
+	let cast = await movieCast(id)
+	for(let i=0;i<Math.min(5,cast.length);++i)
+		movieInfo.innerHTML += `<p>${cast[i].name}</p>`
+	
+	// 트레일러 불러오기
 	let trailerKey = await scrape_trailer(id)
 	let moviePreview = document.getElementById('moviePreview')
 	let trailerURL = 'https://www.youtube.com/embed/'+trailerKey

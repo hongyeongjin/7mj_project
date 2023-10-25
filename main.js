@@ -51,7 +51,7 @@ let moviecard = movie => {
 	poster.classList.add('poster')
 	poster.src = 'https://image.tmdb.org/t/p/original' + movie.poster_path
 	poster.onclick = () => {
-		let w = window.open('index2.html?id=' + movie.id);
+		let w = window.open('detail-page.html?id=' + movie.id);
 	}
 	card.appendChild(poster)
 
@@ -187,7 +187,7 @@ async function main2() {
 	// keyword.addEventListener('keypress', event => {
 	// 	if (event.key == "Enter") searchBtn.click()
 	// })
-
+}
 	// 영화 상세정보
 	fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', options)
     .then((response) => response.json())
@@ -205,6 +205,6 @@ async function main2() {
     })
     .catch(err => console.error(err));
 
-}
+
 
 main2()

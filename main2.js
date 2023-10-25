@@ -8,8 +8,7 @@ const urlParams = new URLSearchParams(queryString)
 // console.log(urlParams)
 const id = urlParams.get('id')
 // console.log(id)
-const movieId = urlParams.get('id') // 해당 id값은 잘 가져온다.
-// console.log(movieId)
+
 
 async function movieCast(id){
 	return fetch(`https://api.themoviedb.org/3/movie/${id}/credits?language=en-US`, options)
@@ -38,9 +37,10 @@ async function image(){
 	let movieInf = document.getElementById('movieInformation')
 	let imageURL = 'https://image.tmdb.org/t/p/original'+imageKey
 	movieInf.innerHTML = `<div><image src="${imageURL}" style="width:400px;height:400px;"></image></div>`
-  }
+}
 
-
+// 세부정보 제작년도, 제목, 평점, 제작비
+results[i.id===]
 
 main2()
 image()

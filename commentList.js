@@ -107,15 +107,17 @@ async function getComment() {
         });
         // $deleteComment.addEventListener("click", deleteComment);
 
-        function deleteComment() {
-            // const li = event.target.parentElement;
+        async function deleteComment() {
             let checkingPW = prompt("비밀번호를 입력해주세요");
             if (data["password"] === checkingPW) {
+                // const parent = event.target.parentElement;
+                // parent.remove();
                 $commentBox.remove();
-                console.log($commentBox)
+                console.log("테스트")
                 localStorage.removeItem("comment")
-                // await deleteDoc(doc(db,"comment",id))
                 alert("삭제되었습니다");
+                // await deleteDoc(doc(db,"comment",id))
+
             } else {
                 alert("올바르지 않은 비밀번호 입니다.");
             }

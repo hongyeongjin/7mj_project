@@ -28,17 +28,19 @@ fetch(`https://api.themoviedb.org/3/movie/${id}?language=en-US`, options)
 fetch(`https://api.themoviedb.org/3/movie/${id}/credits?language=en-US`, options)
   .then((response) => response.json())
   .then((data) => {
-    const $moviePerson = document.querySelector("#movieContents");
-    data.cast.forEach(actor => {
+    const $moviePerson = document.querySelector(".movieContents");
+    const castData = data.cast;
+    for(let i=0;i<Math.min(5,castData.length);++i){
       const $movieCc = document.createElement("div");
       $movieCc.className = "movie-castcrew";
       $movieCc.innerHTML = `
-        <img src="https://image.tmdb.org/t/p/w500${id.profile_path}">
-        <p>${id.name}</p>`;
+        <img src="https://image.tmdb.org/t/p/w500${castData[i].profile_path}">
+        <p>${castData[i].name}</p>`;
       $moviePerson.appendChild($movieCc);
-    });
+    }
   })
   .catch(err => console.error(err));
+
 
 const contBtn = document.querySelector("#contBtn");
 const contBtnClick = (e) => {

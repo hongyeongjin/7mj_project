@@ -37,7 +37,8 @@ async function image(){
 	let imageKey = await scrape_image(id)
 	let movieInf = document.getElementById('movieInformation')
 	let imageURL = 'https://image.tmdb.org/t/p/original'+imageKey
-	movieInf.innerHTML = `<div><image src="${imageURL}" style="width:400px;height:400px;"></image></div>`
+	movieInf.innerHTML = 
+	`<div><image src="${imageURL}" style="width:400px;height:400px;"></image></div>`
   }
 
 

@@ -20,196 +20,189 @@ const db = getFirestore(app);
 
 // addEventListner 넣어줄 변수들
 const $postingBtn = document.querySelector("#postingBtn");
-const $comment = document.querySelector("#comment");
-const $inputBox = document.querySelector("#inputBox")
+// const $comment = document.querySelector("#comment");
+// const $inputBox = document.querySelector("#inputBox")
 
 
 
 
 // 댓글 firebase에 저장
-$postingBtn.addEventListener("click", addComment);
-$inputBox.addEventListener("submit",addComment);
-$inputBox.addEventListener("submit",(event)=>{
-    event.preventDefault();
-})
+// $postingBtn.addEventListener("click", addComment);
+// $inputBox.addEventListener("submit",addComment);
+// $inputBox.addEventListener("submit",(event)=>{
+//     event.preventDefault();
+// })
 
-async function addComment() {
-    let today = new Date();
-    let year = today.getFullYear();
-    let month = today.getMonth();
-    let date = today.getDate();
-    let hours = today.getHours();
-    let minutes = today.getMinutes();
-    // localstorage에 데이터 넣기
-    let localName = localStorage.getItem('userName')
-    if(localName == undefined){
-        localName = prompt("성함을 입력해주세요")
-        localStorage.setItem("userName", localName)
-    }
-
-    localStorage.setItem("comment",$comment.value);
-
-    let password = prompt("비밀번호를 입력해주세요")
-    if(password){
-        let doc = {
-            "id" : localName,
-            "password" : password,
-            "comment" : $comment.value,
-            "date" : `${year}.${month}.${date} ${String(hours).padStart(2,"0")}:${String(minutes).padStart(2,"0")}`,
-        }
-        await addDoc(collection(db,"comment"),doc);
-        localStorage.setItem("password",password);
-        alert('저장되었습니다');
-
-
-    }
-    getComment();
-}
-
-
-// firebase에서 댓글 가져와서 출력
-async function getComment() {
-
-    const $commentList = document.querySelector("#comment-list");
-    // commentList 초기화
-    $commentList.innerHTML = '';
-
-    // firebase 데이터 정렬 (시간순)
-    let dataArr = [];
-    const docs = await getDocs(collection(db, "comment"));
-    docs.forEach((doc)=>{
-        const data = doc.data();
-        dataArr.push(data);
-    })
-    console.log(dataArr)
-    console.log(docs)
-
-    dataArr.sort((a,b)=> new Date(b.date) - new Date(a.date))
-    console.log(dataArr)
-
-    //데이터 넣기
-    dataArr.forEach((detail)=>{
-        const $commentBox = document.createElement("div");
-        $commentBox.className = "commentBox";
-        $commentBox.innerHTML = `
-        작성자: ${detail.id}
-        <br>
-        댓글 : ${detail.comment}
-        <br>
-        작성시간 : ${detail.date}`;
-
-        // 수정, 삭제 버튼 추가
-        if (detail["id"] === localStorage.getItem("userName")) {
-            const $temp = document.createElement("div");
-            $temp.innerHTML = `
-            <button id ="editBtn">수정</button>
-            <button id="deleteBtn">삭제</button>
-            `;
-            $temp.children[0].addEventListener("click", editComment);
-            $temp.children[1].addEventListener("click", deleteComment);
-            $commentBox.append($temp);
-        }
-        $commentList.appendChild($commentBox);
-
-        // 댓글 삭제 함수
-        function deleteComment() {
-            let checkingPW = prompt("비밀번호를 입력해주세요");
-            if (detail["password"] === checkingPW) {
-                $commentBox.remove();
-                localStorage.removeItem("comment");
-                localStorage.removeItem("password");
-                alert("삭제되었습니다");
-                // await deleteDoc(doc(db,"comment",id))
-            } else {
-                alert("올바르지 않은 비밀번호 입니다.");
-            }
-        }
-    });
-    }
-    // docs.forEach((doc) => {
-    //     const data = doc.data();
-    //     console.log(data)
-    //     const $commentBox = document.createElement("div");
-    //     $commentBox.className = "commentBox";
-    //     $commentBox.innerHTML = `
-    //     작성자: ${data.id}
-    //     <br>
-    //     댓글 : ${data.comment}
-    //     <br>
-    //     작성시간 : ${data.date}`;
-
-    //     // 수정, 삭제 버튼 추가
-    //     if (data["id"] === localStorage.getItem("userName")) {
-    //         const $temp = document.createElement("div");
-    //         $temp.innerHTML = `
-    //         <button id ="editBtn">수정</button>
-    //         <button id="deleteBtn">삭제</button>
-    //         `;
-    //         $temp.children[0].addEventListener("click", editComment);
-    //         $temp.children[1].addEventListener("click", deleteComment);
-    //         $commentBox.append($temp);
-    //     }
-    //     $commentList.appendChild($commentBox);
-
-    //     // 댓글 삭제 함수
-    //     function deleteComment() {
-    //         let checkingPW = prompt("비밀번호를 입력해주세요");
-    //         if (data["password"] === checkingPW) {
-    //             $commentBox.remove();
-    //             localStorage.removeItem("comment");
-    //             localStorage.removeItem("password");
-    //             alert("삭제되었습니다");
-    //             // await deleteDoc(doc(db,"comment",id))
-    //         } else {
-    //             alert("올바르지 않은 비밀번호 입니다.");
-    //         }
-    //     }
-    // });
-// }
-getComment();
-
-
-
-// 댓글 수정함수
-function editComment() {
-    alert("editBtn")
-}
-
-    // div 지우는 함수
-    // function removeDiv() {
-    //     $commentBox.style.display = "none"
-    // }
-    // removeDiv();
-
-// const parentElement = event.target.parentElement;
-// const deleteDate = await getDoc(collection(db, "comment", parentElement.id));
-
-
-
-
-//Local stroage에 input text 넣기
-// $postingBtn.addEventListener("click", addLocalstorage);
-
-// function addLocalstorage() {
-//     const commentValue = $comment.value;
+// // firebase, loacal stroage에 데이터 저장하기
+// async function addComment() {
+//     let today = new Date();
+//     let year = today.getFullYear();
+//     let month = today.getMonth();
+//     let date = today.getDate();
+//     let hours = today.getHours();
+//     let minutes = today.getMinutes();
+//     // localstorage에 데이터 넣기
 //     let localName = localStorage.getItem('userName')
 //     if(localName == undefined){
 //         localName = prompt("성함을 입력해주세요")
 //         localStorage.setItem("userName", localName)
 //     }
-//     localStorage.setItem("comment",commentValue);
-//     getLoaclstorage();
+
+//     localStorage.setItem("comment",$comment.value);
+
+//     let password = prompt("비밀번호를 입력해주세요")
+//     if(password){
+//         let doc = {
+//             "id" : localName,
+//             "password" : password,
+//             "comment" : $comment.value,
+//             "date" : `${year}.${month}.${date} ${String(hours).padStart(2,"0")}:${String(minutes).padStart(2,"0")}`,
+//         }
+//         await addDoc(collection(db,"comment"),doc);
+//         localStorage.setItem("password",password);
+//         alert('저장되었습니다');
+
+
+//     }
+//     getComment();
 // }
 
 
-// Local storage에서 데이터 가져오기
+// // firebase에서 댓글 가져와서 출력
+// async function getComment() {
+
+//     const $commentList = document.querySelector("#comment-list");
+//     // commentList 초기화
+//     $commentList.innerHTML = '';
+
+//     // firebase 데이터 정렬 (시간순)
+//     let dataArr = [];
+//     const docs = await getDocs(collection(db, "comment"));
+//     docs.forEach((doc)=>{
+//         const data = doc.data();
+//         dataArr.push(data);
+//     })
+
+//     dataArr.sort((a,b)=> new Date(b.date) - new Date(a.date))
+//     console.log(dataArr)
+
+//     //데이터 넣기
+//     dataArr.forEach((detail)=>{
+//         const $commentBox = document.createElement("div");
+//         $commentBox.className = "commentBox";
+//         $commentBox.innerHTML = `
+//         작성자: ${detail.id}
+//         <br>
+//         댓글 : ${detail.comment}
+//         <br>
+//         작성시간 : ${detail.date}`;
+
+//         // 수정, 삭제 버튼 추가
+//         if (detail["id"] === localStorage.getItem("userName")) {
+//             const $temp = document.createElement("div");
+//             $temp.innerHTML = `
+//             <button id ="editBtn">수정</button>
+//             <button id="deleteBtn">삭제</button>
+//             `;
+//             $temp.children[0].addEventListener("click", editComment);
+//             $temp.children[1].addEventListener("click", deleteComment);
+//             $commentBox.append($temp);
+//         }
+//         $commentList.appendChild($commentBox);
+
+//         // 댓글 삭제 함수
+//         function deleteComment() {
+//             let checkingPW = prompt("비밀번호를 입력해주세요");
+//             if (detail["password"] === checkingPW) {
+//                 $commentBox.remove();
+//                 localStorage.removeItem("comment");
+//                 localStorage.removeItem("password");
+//                 alert("삭제되었습니다");
+//                 // await deleteDoc(doc(db,"comment",id))
+//             } else {
+//                 alert("올바르지 않은 비밀번호 입니다.");
+//             }
+//         }
+//     });
+//     }
+// getComment();
+
+// // 댓글 수정함수
+// function editComment() {
+//     alert("editBtn")
+// }
+
+
+
+
+// Local stroage에 input text 넣기
+// $postingBtn.addEventListener("click", addLocalstorage);
+
+// function addLocalstorage() {
+//     let today = new Date();
+//     let year = today.getFullYear();
+//     let month = today.getMonth();
+//     let date = today.getDate();
+//     let hours = today.getHours();
+//     let minutes = today.getMinutes();
+
+//     const commentValue = $comment.value;
+//     let localName = localStorage.getItem('userName')
+
+//     if(localName == undefined){
+//         localName = prompt("성함을 입력해주세요");
+//         localStorage.setItem("userName", localName);
+//         localStorage.setItem("comment",commentValue);
+//         localStorage.setItem("date",`${year}.${month}.${date} ${String(hours).padStart(2,"0")}:${String(minutes).padStart(2,"0")}`);
+
+//         const password = prompt("비밀번호를 입력해주세요");
+//         localStorage.setItem("password",password);
+//         getLoaclstorage();
+//     }   else {
+//         localStorage.setItem(`${"userName"}`, localName);
+//         localStorage.setItem(`${"comment"}`,commentValue);
+//         localStorage.setItem("date",`${year}-${month}-${date}  ${String(hours).padStart(2,"0")}:${String(minutes).padStart(2,"0")}`);
+
+
+//         const password = prompt("비밀번호를 입력해주세요");
+//         localStorage.setItem("password",password);
+//     }
+
+
+// };
+
+
+// // Local storage에서 데이터 가져오기
 // const $movieComment = document.querySelector("#movieComment");
 
 // function getLoaclstorage() {
-//     const localValue = localStorage.getItem("comment")
+//     const localValue = localStorage.getItem("comment");
+//     const localName = localStorage.getItem("userName");
+//     const localDate = localStorage.getItem("date");
 //     const $commentBox = document.createElement("div");
 //     $commentBox.innerHTML = `
-//         ${localValue}
+//         ${localName} : ${localValue}  [${date}]
 //     `
 //     $movieComment.appendChild($commentBox);
-// }
+// };
+
+const $inputID = document.querySelector("#inputID");
+const $inputPW = document.querySelector("#inputPW");
+const $inputComment = document.querySelector("#inputComment");
+console.log($inputID)
+$postingBtn.addEventListener("click",addLocalStorage);
+
+
+function addLocalStorage() {
+    let submitData = {id : $inputID, pw: $inputPW, comment : $inputComment,};
+    let jsonData = JSON.stringify(submitData)
+    console.log(jsonData)
+    localStorage.setItem("data",jsonData);
+}
+
+
+
+$postingBtn.addEventListener("click",test);
+function test() {
+    alert($inputComment)
+}

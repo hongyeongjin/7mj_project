@@ -41,11 +41,3 @@ fetch(`https://api.themoviedb.org/3/movie/${id}/credits?language=en-US`, options
   })
   .catch(err => console.error(err));
 
-
-const contBtn = document.querySelector("#contBtn");
-const contBtnClick = (e) => {
-  e.preventDefault();
-  window.location.href = `https://api.themoviedb.org/3/movie/${id}?language=en-US`;
-};
-
-contBtn.addEventListener("click", contBtnClick);

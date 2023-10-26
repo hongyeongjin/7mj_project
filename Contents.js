@@ -38,7 +38,7 @@ contBtn.addEventListener("click", contBtnClick);
 fetch('https://api.themoviedb.org/3/movie/240/credits?language=en-US', options) // ID값을 비교해서 해당되는 것에 cast배열을 for문으로 불러온다?
 .then((response) => response.json())
 .then((data) => {
-  const $moviePerson = document.querySelector("#movieContents");
+  const $moviePerson = document.querySelector(".movieContents");
 	data.results.forEach((movie) => {
 	const $movieCc = document.createElement("div"); 
 	$movieCc.className = "movie-castcrew";

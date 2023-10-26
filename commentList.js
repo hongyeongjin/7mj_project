@@ -113,7 +113,7 @@ async function getComment() {
             }
         }
     })
-    $commentBox.style.display = "none";
+
 };
 getComment();
 

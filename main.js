@@ -188,22 +188,22 @@ async function main2() {
 	// 	if (event.key == "Enter") searchBtn.click()
 	// })
 }
-	// 영화 상세정보
-	fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', options)
-    .then((response) => response.json())
-    .then((data) => {
-      const $movieInf = document.querySelector("#movieInformation");
-        data.results.forEach((movie) => {
-        const $moviePost = document.createElement("div"); // div를 만든것
+// 영화 상세정보
+fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', options)  
+.then((response) => response.json())
+.then((data) => {
+  const $movieInf = document.querySelector("#movieInformation");
+	data.results.forEach((movie) => {
+	const $moviePost = document.createElement("div"); // div를 만든것
         $moviePost.className = "movie-card";
-        $moviePost.innerHTML = `
+	$moviePost.innerHTML = `
           <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">` // 클릭시 아이디를 비교해서 같은 걸 가져온다.
 
-      $movieInf.appendChild($moviePost); // div안에 넣은것
-      });
+  $movieInf.appendChild($moviePost); // div안에 넣은것 
+  });
 
-    })
-    .catch(err => console.error(err));
+})
+.catch(err => console.error(err));
 
 
 

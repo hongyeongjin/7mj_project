@@ -1,6 +1,7 @@
 
 import {scrape_image} from './image.js'
 import {options, scrape_trailer} from './trailer.js'
+import {scrape_information} from './detail-inromation.js'
 
 const queryString = window.location.search
 // console.log(queryString)
@@ -8,8 +9,7 @@ const urlParams = new URLSearchParams(queryString)
 // console.log(urlParams)
 const id = urlParams.get('id')
 // console.log(id)
-const movieId = urlParams.get('id') // 해당 id값은 잘 가져온다.
-// console.log(movieId)
+
 
 async function movieCast(id){
 	return fetch(`https://api.themoviedb.org/3/movie/${id}/credits?language=en-US`, options)
@@ -38,9 +38,20 @@ async function image(){
 	let movieInf = document.getElementById('movieInformation')
 	let imageURL = 'https://image.tmdb.org/t/p/original'+imageKey
 	movieInf.innerHTML = `<div><image src="${imageURL}" style="width:400px;height:400px;"></image></div>`
-  }
+}
 
-
-
+// 정보 긁어오기
+async function information(){
+	let a = await scrape_information(id)
+	let inforDiv = document.getElementById('movieInformation')
+	inforDiv.innerHTML += `<div>
+		<p>영화제목 : ${a.title}</p>
+		<p>개봉일 : ${a.release_date}</p>
+		<p>장르 : ${a.genres[0].name}</p>
+		<p>상영시간 : ${a.runtime}</p>
+		<p>평점 : ${a.vote_average}</p>
+	</div>`
+}
 main2()
 image()
+information()

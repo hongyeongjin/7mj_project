@@ -34,7 +34,7 @@ fetch(`https://api.themoviedb.org/3/movie/${id}?language=en-US`, options)
     const castData = data.cast;
 	const $movieCc = document.createElement("div");
 	$movieCc.id = "movie-castcrew";
-    for(let i=0;i<Math.min(5,castData.length);++i){
+    for(let i=0;i<Math.min(7,castData.length);++i){
       $movieCc.innerHTML += `<div class = "movieC">
         <img class="photo" src="https://image.tmdb.org/t/p/w500${castData[i].profile_path}">
         <p>${castData[i].name}</p>

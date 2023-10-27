@@ -11,13 +11,14 @@
 }
 
 body{
-	margin-left: 10px;
-	margin-right: 10px;
+	margin-left: 70px;
+	margin-right: 70px;
+	min-width: 1200px;
 }
 
 #comment-list{
 	margin-top: 10px;
-	width: 500px;
+	width: 550px;
 	height : 500px;
 	overflow : scroll;
 }
@@ -25,11 +26,12 @@ body{
 #movieInformation{
 	display: flex;
 	flex-direction: row;
+	margin-bottom: 40px;
 }
 
 #poster{
 	margin: 10px;
-	width: 200px;
+	width: 300px;
 	height: 300px;
 	border-radius: 5px;
 }
@@ -40,16 +42,23 @@ body{
 }
 
 .tab{
-	margin-left: 10px;
+	margin-left: 0;
+	padding-left: 0;
+	margin-right: 10px;
 	border: 0;
 	background-color: transparent;
-	font-weight: bold;
 	font-size: 20px;
+	font-weight: bold;
 }
 
 .tab:hover{
 	background-color: purple;
 	color: white;
+	font-weight: bold;
+}
+
+.movie-Cont{
+	margin-bottom: 40px;
 }
 
 #movie-castcrew, #bottom{
@@ -57,9 +66,17 @@ body{
 	flex-direction: row;
 }
 
+#movie-castcrew{
+	justify-content: center;
+}
+
+#bottom{
+	justify-content: space-between;
+}
+
 .movieC{
 	text-align: center;
-	margin-left: 15px;
+	margin: 5px 25px;
 }
 
 .photo{
@@ -69,21 +86,18 @@ body{
 }
 
 #trailer{
-	width: 500px;
-	height: 300px;
+	width: 550px;
+	height: 360px;
 }
 
-#moviePreview{
-	margin-right: 15px;
-}
 
 #overview{
 	font-size: 17px;
 }
 
 .indent{
-	margin-left: 15px;
-	font-size: 17px;
+	font-size: 20px;
+	font-weight: bold;
 }
 
 #detail{

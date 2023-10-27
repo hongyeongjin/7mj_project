@@ -33,9 +33,10 @@ fetch(`https://api.themoviedb.org/3/movie/${id}?language=en-US`, options)
     for(let i=0;i<Math.min(5,castData.length);++i){
       const $movieCc = document.createElement("div");
       $movieCc.className = "movie-castcrew";
-      $movieCc.innerHTML = `
+      $movieCc.innerHTML = `<div class = "movieC">
         <img src="https://image.tmdb.org/t/p/w500${castData[i].profile_path}">
-        <p>${castData[i].name}</p>`;
+        <p>${castData[i].name}</p>
+        </div>`;
       $moviePerson.appendChild($movieCc);
     }
   })

@@ -41,6 +41,8 @@ fetch(`https://api.themoviedb.org/3/movie/${id}?language=en-US`, options)
   })
   .catch(err => console.error(err));
 
+<<<<<<< HEAD
+=======
 
 
 
@@ -51,3 +53,4 @@ const contBtnClick = (e) => {
 };
 
 contBtn.addEventListener("click", contBtnClick);
+>>>>>>> af468b147522e5214f5bbf9649f8bdd57bc53c7b

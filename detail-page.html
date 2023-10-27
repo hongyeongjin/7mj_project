@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html>
 
 <head>
     <meta charset="UTF-8">
@@ -10,20 +11,25 @@
     <div id="movieInformation">
 
     </div>
-    
+
     <div class="movieContents">
-        <div id="movie-Cont"></div>
-        <button id="contBtn" type="button">
-        </button>
-        <button id="castBtn" type="button">
-        </button>
-        <button id="photoBtn" type="button">
-        </button>
-        
+        <div id="moviecont">
+        <a href="#moviecont"><button id="contBtn" type="button">줄거리</button></a>
+    </div>
+        <div id="moviecastcrew">
+        <a href="#moviecastcrew"><button id="castBtn" type="button">출연진</button></a>
+    </div>
+        <div id="moviephoto">
+        <a href="#movieComment"><button id="photoBtn" type="button">영상/댓글</button></a>
+    </div>
     </div>
 
-	<div id="movieComment">
+    <div id="movieComment">
         <form id="inputBox">
+<<<<<<< HEAD
+            <input id="comment" type="text" placeholder="댓글을 입력해주세요"></input>
+            <button id="postingBtn" type="button">입력</button>
+=======
             <input id="inputID" type="text" placeholder="ID" required /></input>
             <div class="id-success-message">사용할 수 있는 이름입니다</div>
             <div class="id-failure-message">이름은 2 ~ 5글자여야 합니다.</div>
@@ -35,12 +41,13 @@
 
             <input id="inputComment" type="text" placeholder="댓글을 입력해주세요" required /></input>
             <button id="postingBtn" type="button">입력</button>   
+>>>>>>> af468b147522e5214f5bbf9649f8bdd57bc53c7b
         </form>
         <div id="comment-list"></div>
 
     </div>
     <div id="moviePreview">
-<!--         <div id="message">가나다라</div>
+        <!--         <div id="message">가나다라</div>
         <div id="advanced">
             <button id="advancedBtn"></button>
         </div>
@@ -50,16 +57,15 @@
         <div id="prevPage"></div>
         <div id="nextPage"></div>
         <div id="keyword"></div> -->
-        
 
-	</div>
+    </div>
     <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-analytics.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-firestore.js"></script>
-    <script type = "module" src="commentList.js"></script>
-	<script type="module" src="detail.js"></script>
+    <script type="module" src="commentList.js"></script>
+    <script type="module" src="detail.js"></script>
     <script type="module" src="Contents.js"></script>
     <script type="module" src="detail-inromation.js"></script>
 </body>

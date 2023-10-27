@@ -1,5 +1,115 @@
-#movieComment{
+@font-face {
+	font-family: "GmarketSansMedium";
+	src: url("GmarketSansMedium.woff") format("woff");
+	font-weight: normal;
+	font-style: normal;
+}
+
+
+* {
+	font-family: 'GmarketSansMedium', 궁서;
+}
+
+body{
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+#comment-list{
+	margin-top: 10px;
+	width: 500px;
 	height : 500px;
-	width : 500px;
 	overflow : scroll;
+}
+
+#movieInformation{
+	display: flex;
+	flex-direction: row;
+}
+
+#poster{
+	margin: 10px;
+	width: 200px;
+	height: 300px;
+	border-radius: 5px;
+}
+
+#buttons{
+	display: flex;
+	flex-direction: row;
+}
+
+.tab{
+	margin-left: 10px;
+	border: 0;
+	background-color: transparent;
+	font-weight: bold;
+	font-size: 20px;
+}
+
+.tab:hover{
+	background-color: purple;
+	color: white;
+}
+
+#movie-castcrew, #bottom{
+	display: flex;
+	flex-direction: row;
+}
+
+.movieC{
+	text-align: center;
+	margin-left: 15px;
+}
+
+.photo{
+	width: 150px;
+	height: 225px;
+	border-radius: 20px;
+}
+
+#trailer{
+	width: 500px;
+	height: 300px;
+}
+
+#moviePreview{
+	margin-right: 15px;
+}
+
+#overview{
+	font-size: 17px;
+}
+
+.indent{
+	margin-left: 15px;
+	font-size: 17px;
+}
+
+#detail{
+	width: 600px;
+	/* border: 1px solid orange;
+	border-style: dotted; */
+	border-radius: 10px;
+	font-size: 17px;
+	font-weight: bold;
+	padding: 7px;
+	margin-left: 20px;
+}
+
+#title{
+	font-size: 25px;
+}
+
+#inputBox > input{
+	margin-bottom: 10px;
+}
+
+#inputBox > label{
+	color: red;
+}
+
+#dateBox{
+	margin-left: 7px;
+	font-size: 9px;
 }

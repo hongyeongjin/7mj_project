@@ -74,11 +74,14 @@ let moviecard = movie => {
 	let rating = document.createElement('p')
 	rating.classList.add('rating')
 	rating.textContent = 'Rating ' + movie.vote_average
+
 	illu.appendChild(rating)
+	
+	
 
 	let overview = document.createElement('overview')
 	overview.classList.add('overview')
-	overview.textContent = movie.overview
+
 	illu.appendChild(overview)
 
 	card.appendChild(illu)
@@ -93,6 +96,7 @@ let genrecheck = (id, name) => {
 
 	let check = document.createElement('input')
 	check.setAttribute("type", "checkbox");
+	check.className = "checkBox"
 	check.id = name
 	check.checked = true
 	div.appendChild(check)

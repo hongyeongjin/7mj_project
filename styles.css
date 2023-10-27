@@ -1,16 +1,17 @@
 *{
+	@font-face {
 		font-family: 'GmarketSansMedium';
 		src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
 		font-weight: normal;
 		font-style: normal;
-	
 	}
-	
-	html, body{
+}
+
+html, body{
 	margin: 0 auto;
 	padding: 0;
-	}
-	#searchBar{
+}
+#searchBar{
 	background-color: rgb(68,68,68);
 	display: flex;
 	flex-direction: row;
@@ -18,9 +19,9 @@
 	justify-content: center;
 	height: 50px;
 	color : rgb(218,0,55)
-	}
-	
-	#keyword{
+}
+
+#keyword{
 	width: 250px;
 	height: 25px;
 	margin-left: 15px;
@@ -34,22 +35,22 @@
 	border: 1px solid black;
 	border-radius: 5px;
 	font-weight: bold;
-	}
-	
-	#advancedBtn{
+}
+
+#advancedBtn{
 	color: rgb(237,237,237);
-	}
-	
-	#searchBtn{
+}
+
+#searchBtn{
 	color: rgb(229,178,64);
-	}
-	
-	button:hover{
+}
+
+button:hover{
 	background-color: orange;
 	color: white;
-	}
-	
-	#advanced{
+}
+
+#advanced{
 	background-color: rgb(23, 23, 23);
 	display: none;
 	grid-template-columns: repeat(7, 1fr);
@@ -57,9 +58,9 @@
 	padding: 5px 0;
 	height: 90px;
 	color : white;
-	}
-	
-	#message{
+}
+
+#message{
 	background-color: rgb(68,68,68);
 	text-align: center;
 	color: white;
@@ -80,11 +81,11 @@
 	display: inline-block;
 	text-align: center;
 	width: 30px;
-	}
-	
-	
-	
-	.card{
+}
+
+
+
+.card{
 	height: 96px;
 	margin-top: 10px;
 	display: flex;
@@ -92,9 +93,10 @@
 	border: 1px solid black;
 	border-radius: 3px;
 	overflow: hidden;
-	}
 	
-	p{
+}
+
+p{
 	margin: 2px;
 	}
 	
@@ -107,10 +109,10 @@
 	
 	.illustration{
 	padding: 3px;
-	background-color: rgb(142, 139, 139);
-	}
-	
-	.title{
+	margin-top : 10px;
+}
+
+.title{
 	font-weight: bold;
 	cursor: pointer;
 	}
@@ -125,13 +127,18 @@
 	
 	.rating{
 	font-size: 12px;
-	}
-	
-	.overview{
+		
+}
+
+.overview{
 	margin-left: 3px;
 	font-size: 9px;
-	}
-	
-	#label {
+}
+
+#label {
 	color : rgb(218,0,55)
-	}
+}
+
+.checkBox {
+	accent-color : red
+}

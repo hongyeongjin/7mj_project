@@ -11,49 +11,43 @@
     <div id="movieInformation">
 
     </div>
-
+	<hr>
     <div class="movieContents">
-        <div id="moviecont">
-        <a href="#moviecont"><button id="contBtn" type="button">줄거리</button></a>
-    </div>
-        <div id="moviecastcrew">
-        <a href="#moviecastcrew"><button id="castBtn" type="button">출연진</button></a>
-    </div>
-        <div id="moviephoto">
-        <a href="#movieComment"><button id="photoBtn" type="button">영상/댓글</button></a>
-    </div>
+		<div id="buttons">
+			<a href="#overview"><button class="tab" id="contBtn" type="button">줄거리</button></a>
+			<a href="#movie-castcrew"><button class="tab" id="castBtn" type="button">출연진</button></a>
+			<a href="#movieComment"><button class="tab" id="photoBtn" type="button">영상/댓글</button></a>
+		</div>
+<!-- 		<div id="moviecont"></div>
+		<div id="moviecastcrew"></div>
+		<div id="moviephoto"></div> -->
+		<hr>
     </div>
 
-    <div id="movieComment">
-        <form id="inputBox">
-            <input id="inputID" type="text" placeholder="ID" required /></input>
-            <div class="id-success-message">사용할 수 있는 이름입니다</div>
-            <div class="id-failure-message">이름은 2 ~ 5글자여야 합니다.</div>
-            <div class="id-failure-messageTwo">한글 또는 숫자만 가능합니다.</div>
+	<div id="bottom">
+		<div id="moviePreview">
+			<p class="indent">영상</p><hr>
+		</div>
+		<div id="movieComment">
+			<p class="indent">댓글</p><hr>
+			<form id="inputBox">
+				<input id="inputID" type="text" placeholder="ID" required /></input>
+				<label class="id-success-message">사용할 수 있는 이름입니다</label>
+				<label class="id-failure-message">이름은 2 ~ 5글자여야 합니다.</label>
+				<label class="id-failure-messageTwo">한글 또는 숫자만 가능합니다.</label><br>
 
-            <input id="inputPW" type="password" placeholder="Password" required /></input>
-            <div class="pw-success-message">사용할 수 있는 비밀번호입니다.</div>
-            <div class="pw-failure-message">비밀 번호는 4자리 이상이어야 합니다.</div>
+				<input id="inputPW" type="password" placeholder="Password" required /></input>
+				<label class="pw-success-message">사용할 수 있는 비밀번호입니다.</label>
+				<label class="pw-failure-message">비밀 번호는 4자리 이상이어야 합니다.</label><br>
 
-            <input id="inputComment" type="text" placeholder="댓글을 입력해주세요" required /></input>
-            <button id="postingBtn" type="button">입력</button>   
-        </form>
-        <div id="comment-list"></div>
-
-    </div>
-    <div id="moviePreview">
-        <!--         <div id="message">가나다라</div>
-        <div id="advanced">
-            <button id="advancedBtn"></button>
-        </div>
-        <div id="movieList"></div>
-        <div id="cards"></div>
-        <button id="searchBtn"></button>
-        <div id="prevPage"></div>
-        <div id="nextPage"></div>
-        <div id="keyword"></div> -->
-
-    </div>
+				<input id="inputComment" type="text" placeholder="댓글을 입력해주세요" required /></input>
+				<button id="postingBtn" type="button">입력</button>   
+			</form>
+			<div id="comment-list"></div>
+		</div>
+		
+	</div>
+	
     <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-analytics.js"></script>

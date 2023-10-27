@@ -1,31 +1,9 @@
-#movieInformation {
-    background-color: green;
-    width: 900px;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    border-color: aqua;
+.button {
     
 }
 
-.movie-Cont {
-    width: 600px;
-    
+#movieComment{
+	height : 500px;
+	width : 500px;
+	overflow : scroll;
 }
-
-.movie-castcrew {
-    display: grid;
-    
-    background-color: green;
-}
-
-.movieC{
-    display: grid;
-    grid-template-rows: repeat(2, 1fr);
-    grid-template-columns: repeat(3, 1fr);
-}
-
-.movieC > img {
-    width: 100px;
-    height: 100px;
-}
-

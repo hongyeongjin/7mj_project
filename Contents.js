@@ -25,7 +25,7 @@ fetch(`https://api.themoviedb.org/3/movie/${id}?language=en-US`, options)
   .catch(err => console.error(err));
 
 // 영화 출연진 정보 가져오기
-fetch(`https://api.themoviedb.org/3/movie/${id}/credits?language=en-US`, options)
+  fetch(`https://api.themoviedb.org/3/movie/${id}/credits?language=en-US`, options)
   .then((response) => response.json())
   .then((data) => {
     const $moviePerson = document.querySelector(".movieContents");
@@ -41,6 +41,8 @@ fetch(`https://api.themoviedb.org/3/movie/${id}/credits?language=en-US`, options
     }
   })
   .catch(err => console.error(err));
+
+
 
 
 const contBtn = document.querySelector("#contBtn");

@@ -7,7 +7,7 @@ const queryString = window.location.search
 // console.log(queryString)
 const urlParams = new URLSearchParams(queryString)
 // console.log(urlParams)
-const id = urlParams.get('id')
+export const id = urlParams.get('id')
 // console.log(id)
 
 

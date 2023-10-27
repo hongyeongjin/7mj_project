@@ -53,7 +53,7 @@ function addLocalStorage() {
         //날짜 생성
         let today = new Date();
         let year = today.getFullYear();
-        let month = today.getMonth();
+        let month = today.getMonth()+1;
         let date = today.getDate();
         let hours = today.getHours();
         let minutes = today.getMinutes();
@@ -94,7 +94,7 @@ function getLocalStorage() {
         const $commentBox = document.createElement("div");
         $commentBox.id = "commentBox";
 
-        $commentBox.append(`${obj.id} : ${obj.comment}`);
+        $commentBox.append(`${obj.id} : ${obj.comment} `);
         $commentList.appendChild($commentBox);
 
         // 날짜부분 css 넣기 편하게 따로 빼놓음
@@ -128,13 +128,13 @@ function IDvalidationCheck(idValue) {
         if (checkNumAndKor(idValue) === false) {
             $idSuccessMessage.style.display = "none";
             $idFailureMessage.style.display = "none";
-            $idFailureMessageTwo.style.display = "block";
+            $idFailureMessageTwo.style.display = "inline";
         } else if (idLength(idValue) === false) {
             $idSuccessMessage.style.display = "none";
-            $idFailureMessage.style.display = "block";
+            $idFailureMessage.style.display = "inline";
             $idFailureMessageTwo.style.display = "none";
         } else if (idLength(idValue) === true && checkNumAndKor(idValue) === true) {
-            $idSuccessMessage.style.display = "block";
+            $idSuccessMessage.style.display = "inline";
             $idFailureMessage.style.display = "none";
             $idFailureMessageTwo.style.display = "none";
         }
@@ -164,12 +164,12 @@ $pwFailureMessage.style.display = "none";
 
 function PWvalidationCheck(pwValue) {
     pwValue = $inputPW.value;
-    if (pwValue !== 0) {
+    if (pwValue.length !== 0) {
         if (pwLength(pwValue) === false) {
             $pwSuccessMessage.style.display = "none";
-            $pwFailureMessage.style.display = "block";
+            $pwFailureMessage.style.display = "inline";
         } else {
-            $pwSuccessMessage.style.display = "block";
+            $pwSuccessMessage.style.display = "inline";
             $pwFailureMessage.style.display = "none";
         }
     } else {

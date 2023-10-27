@@ -129,9 +129,3 @@ p{
 	margin-left: 3px;
 	font-size: 9px;
 }
-
-#movieComment{
-	height : 500px;
-	width : 500px;
-	overflow : scroll;
-}

@@ -1,8 +1,17 @@
 // Firebase SDK 라이브러리 가져오기
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
 import { getFirestore } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js";
-import {getDocs, getDoc, deleteDoc, addDoc, collection, doc, updateDoc} from "https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js";
+import {
+    getDocs,
+    getDoc,
+    deleteDoc,
+    addDoc,
+    collection,
+    doc,
+    updateDoc,
+} from "https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js";
 import { query, orderBy, where } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js";
+import { id } from "./detail.js";
 
 // firebase 구성 정보 설정
 const firebaseConfig = {
@@ -23,9 +32,155 @@ const $postingBtn = document.querySelector("#postingBtn");
 // const $comment = document.querySelector("#comment");
 // const $inputBox = document.querySelector("#inputBox")
 
+const $inputID = document.querySelector("#inputID");
+const $inputPW = document.querySelector("#inputPW");
+const $inputComment = document.querySelector("#inputComment");
+
+// validation check selector
+const $idSuccessMessage = document.querySelector(".id-success-message"); //사용할 수 있는 이름입니다.
+const $idFailureMessage = document.querySelector(".id-failure-message"); // 이름은 2~ 5글자여야 합니다.
+const $idFailureMessageTwo = document.querySelector(".id-failure-messageTwo"); // 한글 또는 숫자만 가능합니다.
+
+const $pwSuccessMessage = document.querySelector(".pw-success-message"); // 사용할 수 있는 비밀번호입니다.
+const $pwFailureMessage = document.querySelector(".pw-failure-message"); // 비밀번호는 4자리 이상입니다.
+
+
+$postingBtn.addEventListener("click", addLocalStorage);
+
+// add local storage
+function addLocalStorage() {
+    if ($inputID.value.length > 0 && $inputPW.value.length > 0 && $inputComment.value.length > 0) {
+        //날짜 생성
+        let today = new Date();
+        let year = today.getFullYear();
+        let month = today.getMonth();
+        let date = today.getDate();
+        let hours = today.getHours();
+        let minutes = today.getMinutes();
+        let seconds = today.getSeconds();
+        // let now = today.toLocaleString();
+
+        let now = `${year}.${month}.${date} ${String(hours).padStart(2, "0")}:${String(minutes).padStart(
+            2,
+            "0"
+        )}:${String(seconds).padStart(2, "0")}`;
+        let submitData = { id: $inputID.value, pw: $inputPW.value, comment: $inputComment.value, date: now };
+        let jsonData = JSON.stringify(submitData);
+        localStorage.setItem(`${id},${now}`, jsonData);
+
+        getLocalStorage();
+    } else {
+        alert("글자 수가 너무 적습니다.");
+    }
+}
+
+// get local storage
+function getLocalStorage() {
+    const $commentList = document.querySelector("#comment-list");
+
+    $commentList.innerHTML = "";
+
+    let parsedArr = [];
+    for (let i = 0; i < localStorage.length; i++) {
+        if (localStorage.key(i).split(",")[0] === `${id}`) {
+            const parsedData = JSON.parse(localStorage.getItem(localStorage.key(i)));
+            parsedArr.push(parsedData);
+        }
+    }
+    console.log("parsedArr=>", parsedArr);
+    parsedArr.sort((a, b) => new Date(b.date) - new Date(a.date));
+    console.log("parsedArr=>", parsedArr);
+    parsedArr.forEach((obj) => {
+        const $commentBox = document.createElement("div");
+        $commentBox.id = "commentBox";
+
+        $commentBox.append(`${obj.id} : ${obj.comment}`);
+        $commentList.appendChild($commentBox);
+
+        // 날짜부분 css 넣기 편하게 따로 빼놓음
+        const $dateBox = document.createElement("span");
+        $dateBox.id = "dateBox";
+        $dateBox.append(`[${obj.date}]`);
+        $commentBox.appendChild($dateBox);
+    });
+
+    // submit 하게되면 validation check 비활성화
+    // $idSuccessMessage.style.display = "none";
+    // $idFailureMessage.style.display = "none";
+    // $idFailureMessageTwo.style.display = "none";
+}
+getLocalStorage();
 
 
 
+// ID validation check
+$inputID.addEventListener("input", IDvalidationCheck);
+let idValue = $inputID.value;
+
+$idSuccessMessage.style.display = "none";
+$idFailureMessage.style.display = "none";
+$idFailureMessageTwo.style.display = "none";
+
+function IDvalidationCheck(idValue) {
+    idValue = $inputID.value;
+    //초기 값 없애기
+    if (idValue.length !== 0) {
+        if (checkNumAndKor(idValue) === false) {
+            $idSuccessMessage.style.display = "none";
+            $idFailureMessage.style.display = "none";
+            $idFailureMessageTwo.style.display = "block";
+        } else if (idLength(idValue) === false) {
+            $idSuccessMessage.style.display = "none";
+            $idFailureMessage.style.display = "block";
+            $idFailureMessageTwo.style.display = "none";
+        } else if (idLength(idValue) === true && checkNumAndKor(idValue) === true) {
+            $idSuccessMessage.style.display = "block";
+            $idFailureMessage.style.display = "none";
+            $idFailureMessageTwo.style.display = "none";
+        }
+    } else {
+        $idSuccessMessage.style.display = "none";
+        $idFailureMessage.style.display = "none";
+        $idFailureMessageTwo.style.display = "none";
+    }
+}
+
+function checkNumAndKor(idValue) {
+    let checkKor = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
+    let checkNum = /[0-9]/;
+    let checkEng = /[a-zA-Z]/;
+    return checkKor.test(idValue) || (checkNum.test(idValue) && !checkEng.test(idValue));
+}
+
+function idLength(idValue) {
+    return idValue.length >= 2 && idValue.length <= 5;
+}
+
+// PW validation check
+$inputPW.addEventListener("input",PWvalidationCheck)
+let pwValue = $inputPW.value;
+$pwSuccessMessage.style.display = "none";
+$pwFailureMessage.style.display = "none";
+
+function PWvalidationCheck(pwValue) {
+    pwValue = $inputPW.value;
+    if (pwValue !== 0) {
+        if (pwLength(pwValue) === false) {
+            $pwSuccessMessage.style.display = "none";
+            $pwFailureMessage.style.display = "block";
+        } else {
+            $pwSuccessMessage.style.display = "block";
+            $pwFailureMessage.style.display = "none";
+        }
+    } else {
+        $pwSuccessMessage.style.display = "none";
+        $pwFailureMessage.style.display = "none";
+    }
+}
+
+function pwLength(pwValue) {
+    return pwValue.length >= 4;
+}
 // 댓글 firebase에 저장
 // $postingBtn.addEventListener("click", addComment);
 // $inputBox.addEventListener("submit",addComment);
@@ -62,11 +217,9 @@ const $postingBtn = document.querySelector("#postingBtn");
 //         localStorage.setItem("password",password);
 //         alert('저장되었습니다');
 
-
 //     }
 //     getComment();
 // }
-
 
 // // firebase에서 댓글 가져와서 출력
 // async function getComment() {
@@ -131,78 +284,3 @@ const $postingBtn = document.querySelector("#postingBtn");
 // function editComment() {
 //     alert("editBtn")
 // }
-
-
-
-
-// Local stroage에 input text 넣기
-// $postingBtn.addEventListener("click", addLocalstorage);
-
-// function addLocalstorage() {
-//     let today = new Date();
-//     let year = today.getFullYear();
-//     let month = today.getMonth();
-//     let date = today.getDate();
-//     let hours = today.getHours();
-//     let minutes = today.getMinutes();
-
-//     const commentValue = $comment.value;
-//     let localName = localStorage.getItem('userName')
-
-//     if(localName == undefined){
-//         localName = prompt("성함을 입력해주세요");
-//         localStorage.setItem("userName", localName);
-//         localStorage.setItem("comment",commentValue);
-//         localStorage.setItem("date",`${year}.${month}.${date} ${String(hours).padStart(2,"0")}:${String(minutes).padStart(2,"0")}`);
-
-//         const password = prompt("비밀번호를 입력해주세요");
-//         localStorage.setItem("password",password);
-//         getLoaclstorage();
-//     }   else {
-//         localStorage.setItem(`${"userName"}`, localName);
-//         localStorage.setItem(`${"comment"}`,commentValue);
-//         localStorage.setItem("date",`${year}-${month}-${date}  ${String(hours).padStart(2,"0")}:${String(minutes).padStart(2,"0")}`);
-
-
-//         const password = prompt("비밀번호를 입력해주세요");
-//         localStorage.setItem("password",password);
-//     }
-
-
-// };
-
-
-// // Local storage에서 데이터 가져오기
-// const $movieComment = document.querySelector("#movieComment");
-
-// function getLoaclstorage() {
-//     const localValue = localStorage.getItem("comment");
-//     const localName = localStorage.getItem("userName");
-//     const localDate = localStorage.getItem("date");
-//     const $commentBox = document.createElement("div");
-//     $commentBox.innerHTML = `
-//         ${localName} : ${localValue}  [${date}]
-//     `
-//     $movieComment.appendChild($commentBox);
-// };
-
-const $inputID = document.querySelector("#inputID");
-const $inputPW = document.querySelector("#inputPW");
-const $inputComment = document.querySelector("#inputComment");
-console.log($inputID)
-$postingBtn.addEventListener("click",addLocalStorage);
-
-
-function addLocalStorage() {
-    let submitData = {id : $inputID, pw: $inputPW, comment : $inputComment,};
-    let jsonData = JSON.stringify(submitData)
-    console.log(jsonData)
-    localStorage.setItem("data",jsonData);
-}
-
-
-
-$postingBtn.addEventListener("click",test);
-function test() {
-    alert($inputComment)
-}

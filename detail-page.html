@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>세부 페이지</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles2.css">
 </head>
 
 <body>
@@ -24,9 +24,16 @@
 
 	<div id="movieComment">
         <form id="inputBox">
-            <input id="inputID" type="text" placeholder="ID"></input>
-            <input id="inputPW" type="text" placeholder="Password"></input>
-            <input id="inputComment" type="text" placeholder="댓글을 입력해주세요"></input>
+            <input id="inputID" type="text" placeholder="ID" required /></input>
+            <div class="id-success-message">사용할 수 있는 이름입니다</div>
+            <div class="id-failure-message">이름은 2 ~ 5글자여야 합니다.</div>
+            <div class="id-failure-messageTwo">한글 또는 숫자만 가능합니다.</div>
+
+            <input id="inputPW" type="password" placeholder="Password" required /></input>
+            <div class="pw-success-message">사용할 수 있는 비밀번호입니다.</div>
+            <div class="pw-failure-message">비밀 번호는 4자리 이상이어야 합니다.</div>
+
+            <input id="inputComment" type="text" placeholder="댓글을 입력해주세요" required /></input>
             <button id="postingBtn" type="button">입력</button>   
         </form>
         <div id="comment-list"></div>
@@ -54,6 +61,7 @@
     <script type = "module" src="commentList.js"></script>
 	<script type="module" src="detail.js"></script>
     <script type="module" src="Contents.js"></script>
+    <script type="module" src="detail-inromation.js"></script>
 </body>
 
 </html>

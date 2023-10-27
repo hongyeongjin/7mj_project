@@ -49,7 +49,7 @@ $postingBtn.addEventListener("click", addLocalStorage);
 
 // add local storage
 function addLocalStorage() {
-    if ($inputID.value.length > 0 && $inputPW.value.length > 0 && $inputComment.value.length > 0) {
+    if ($inputID.value.length >= 2 && $inputID.value.length <=5 && $inputPW.value.length > 4 && $inputComment.value.length > 0) {
         //날짜 생성
         let today = new Date();
         let year = today.getFullYear();
@@ -70,7 +70,7 @@ function addLocalStorage() {
 
         getLocalStorage();
     } else {
-        alert("글자 수가 너무 적습니다.");
+        alert("이름은 2 ~ 5글자, 비밀번호는 4자리 이상 입력해주세요.");
     }
 }
 

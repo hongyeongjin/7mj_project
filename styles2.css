@@ -1,40 +1,5 @@
- html {
-  scroll-behavior: smooth;
- }
-
- .title {
-    text-align:center;
-    margin:auto;
-  }
-  .scroll-container{
-    scroll-behavior: smooth;
-    display: block;
-    text-align:center;
-    margin:auto;
-    overflow-y: scroll;
-    width: 350px;
-    height: 250px;
-  }
-  
-  #section1 {
-    height: 100%;
-    padding-top:20px;
-    background-color: aliceblue;
-  }
-  
-  #section2 {
-    height: 100%;
-    padding-top:20px;
-    background-color: yellow;
-  }
-=======
-.button {
-    
-}
-
 #movieComment{
 	height : 500px;
 	width : 500px;
 	overflow : scroll;
 }
->>>>>>> af468b147522e5214f5bbf9649f8bdd57bc53c7b

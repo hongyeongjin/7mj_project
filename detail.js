@@ -45,10 +45,10 @@ async function information(){
 	let a = await scrape_information(id)
 	let inforDiv = document.getElementById('movieInformation')
 	inforDiv.innerHTML += `<div id="detail">
-		<p id="title">영화제목 : ${a.title}</p>
+		<p id="title">${a.title}</p>
 		<p>개봉일 : ${a.release_date}</p>
 		<p>장르 : ${a.genres.map(a => a.name).join(', ')}</p>
-		<p>상영시간 : ${a.runtime}</p>
+		<p>상영시간 : ${a.runtime}분</p>
 		<p>평점 : ${a.vote_average}</p>
 	</div>`
 }

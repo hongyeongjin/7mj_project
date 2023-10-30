@@ -16,7 +16,7 @@ async function scrape_movie(){
 
 // 트레일러 긁어오기
 async function scrape_trailer(id){
-	return await fetch(`https://api.themoviedb.org/3/movie/${id}/videos?language=eko-KR`, options)
+	return await fetch(`https://api.themoviedb.org/3/movie/${id}/videos?language=ko-KR`, options)
 		.then(res => res.json())
 	    .then(res => res.results[0].key)
 	    .catch(err => console.error(err));

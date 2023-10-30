@@ -12,7 +12,7 @@ export const id = urlParams.get('id')
 
 
 async function movieCast(id){
-	return fetch(`https://api.themoviedb.org/3/movie/${id}/credits?language=en-US`, options)
+	return fetch(`https://api.themoviedb.org/3/movie/${id}/credits?language=ko-KR`, options)
 	  .then(res => res.json())
 	  .then(res => res.cast)
 	  .catch(err => console.error(err));

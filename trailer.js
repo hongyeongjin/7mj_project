@@ -8,7 +8,7 @@ export const options = {
 
 // 트레일러 긁어오기
 export async function scrape_trailer(id){
-	return await fetch(`https://api.themoviedb.org/3/movie/${id}/videos?language=en-US`, options)
+	return await fetch(`https://api.themoviedb.org/3/movie/${id}/videos?language=ko-KR`, options)
 		.then(res => res.json())
 	    .then(res => res.results[0].key)
 	    .catch(err => console.error(err));

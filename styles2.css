@@ -61,7 +61,7 @@ body{
 	margin-bottom: 40px;
 }
 
-#movie-castcrew, #bottom{
+#movie-castcrew{
 	display: flex;
 	flex-direction: row;
 }
@@ -72,6 +72,8 @@ body{
 
 #bottom{
 	justify-content: space-between;
+	display : grid;
+	grid-template-columns: 1fr 1fr;
 }
 
 .movieC{
@@ -129,5 +131,24 @@ body{
 }
 
 #commentBox {
+	margin : 5px;
+}
+
+header {
+	height : 50px;
+}
+
+#homeBtn {
+	display : inline-block;
+	height : 50px;
+	width : 50px;
+}
+
+#homeImg {
+	height : 50px;
+	width : 50px;
+}
+
+.modifyBtn, .deleteBtn {
 	margin : 5px;
 }

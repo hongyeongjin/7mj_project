@@ -22,7 +22,7 @@ let totalPage = document.getElementById('totalPage')
 async function scrape_movie(m = 3) {
 	let proms = [], movieList = []
 	message.textContent = "로딩 중입니다. 잠시만 기다려주세요."
-	for (let i = 1; i <= m; ++i) proms.push(await fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=' + i, options))
+	for (let i = 1; i <= m; ++i) proms.push(await fetch('https://api.themoviedb.org/3/movie/top_rated?language=ko-KR&page=' + i, options))
 	let proms2 = await Promise.all(proms)
 	let jsons = await Promise.all(proms2.map(res => res.json()))
 	let results = await jsons.map(r => r.results.map(c => movieList.push(c)))

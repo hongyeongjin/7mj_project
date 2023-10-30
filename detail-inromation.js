@@ -6,7 +6,7 @@ const options = {
     }
   };
   export async function scrape_information(id) {
-    return fetch(`https://api.themoviedb.org/3/movie/${id}?language=en-US`, options)
+    return fetch(`https://api.themoviedb.org/3/movie/${id}?language=ko-KR`, options)
     .then(response => response.json())
     .catch(err => console.error(err));
     

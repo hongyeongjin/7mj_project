@@ -6,7 +6,7 @@ const options = {
   }
 };
 
-fetch('https://api.themoviedb.org/3/movie/240/credits?language=en-US', options)
+fetch('https://api.themoviedb.org/3/movie/240/credits?language=ko-KR', options)
   .then(response => response.json())
   .then(response => console.log(response))
   .catch(err => console.error(err));

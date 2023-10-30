@@ -101,6 +101,8 @@ function getLocalStorage() {
         // 수정, 삭제 버튼
         const $modifyBtn = document.createElement("button");
         const $deleteBtn = document.createElement("button");
+        $modifyBtn.className = "modifyBtn"
+        $deleteBtn.className = "deleteBtn"
         $modifyBtn.innerHTML = "수정";
         $deleteBtn.innerHTML = "삭제";
 

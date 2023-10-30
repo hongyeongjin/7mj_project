@@ -123,8 +123,12 @@ body{
 	margin-bottom: 10px;
 }
 
-#inputBox > label{
-	color: red;
+.id-success-message, .pw-success-message {
+	color : blue;
+}
+
+.id-failure-message, .id-failure-messageTwo, .pw-failure-message {
+	color : red;
 }
 
 #dateBox{

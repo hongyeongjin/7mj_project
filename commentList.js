@@ -1,31 +1,31 @@
 // Firebase SDK 라이브러리 가져오기
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
-import { getFirestore } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js";
-import {
-    getDocs,
-    getDoc,
-    deleteDoc,
-    addDoc,
-    collection,
-    doc,
-    updateDoc,
-} from "https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js";
-import { query, orderBy, where } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js";
+// import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
+// import { getFirestore } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js";
+// import {
+//     getDocs,
+//     getDoc,
+//     deleteDoc,
+//     addDoc,
+//     collection,
+//     doc,
+//     updateDoc,
+// } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js";
+// import { query, orderBy, where } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js";
 import { id } from "./detail.js";
 
 // firebase 구성 정보 설정
-const firebaseConfig = {
-    apiKey: "AIzaSyD7Qi-Y0MaiiqQTVQkgHMAYLgGk2fPeuzA",
-    authDomain: "sparta-team7.firebaseapp.com",
-    projectId: "sparta-team7",
-    storageBucket: "sparta-team7.appspot.com",
-    messagingSenderId: "625900926887",
-    appId: "1:625900926887:web:e43313b09417240ab92882",
-    measurementId: "G-CFZCHLHYG9",
-};
+// const firebaseConfig = {
+//     apiKey: "AIzaSyD7Qi-Y0MaiiqQTVQkgHMAYLgGk2fPeuzA",
+//     authDomain: "sparta-team7.firebaseapp.com",
+//     projectId: "sparta-team7",
+//     storageBucket: "sparta-team7.appspot.com",
+//     messagingSenderId: "625900926887",
+//     appId: "1:625900926887:web:e43313b09417240ab92882",
+//     measurementId: "G-CFZCHLHYG9",
+// };
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+// const app = initializeApp(firebaseConfig);
+// const db = getFirestore(app);
 
 // addEventListner 넣어줄 변수들
 const $postingBtn = document.querySelector("#postingBtn");
@@ -44,16 +44,20 @@ const $idFailureMessageTwo = document.querySelector(".id-failure-messageTwo"); /
 const $pwSuccessMessage = document.querySelector(".pw-success-message"); // 사용할 수 있는 비밀번호입니다.
 const $pwFailureMessage = document.querySelector(".pw-failure-message"); // 비밀번호는 4자리 이상입니다.
 
-
 $postingBtn.addEventListener("click", addLocalStorage);
 
 // add local storage
 function addLocalStorage() {
-    if ($inputID.value.length >= 2 && $inputID.value.length <=5 && $inputPW.value.length > 4 && $inputComment.value.length > 0) {
+    if (
+        $inputID.value.length >= 2 &&
+        $inputID.value.length <= 5 &&
+        $inputPW.value.length >= 4 &&
+        $inputComment.value.length > 0
+    ) {
         //날짜 생성
         let today = new Date();
         let year = today.getFullYear();
-        let month = today.getMonth()+1;
+        let month = today.getMonth() + 1;
         let date = today.getDate();
         let hours = today.getHours();
         let minutes = today.getMinutes();
@@ -87,21 +91,34 @@ function getLocalStorage() {
             parsedArr.push(parsedData);
         }
     }
-    console.log("parsedArr=>", parsedArr);
+
+    //local storage 데이터 정렬
     parsedArr.sort((a, b) => new Date(b.date) - new Date(a.date));
-    console.log("parsedArr=>", parsedArr);
     parsedArr.forEach((obj) => {
         const $commentBox = document.createElement("div");
         $commentBox.id = "commentBox";
 
+        // 수정, 삭제 버튼
+        const $modifyBtn = document.createElement("button");
+        const $deleteBtn = document.createElement("button");
+        $modifyBtn.innerHTML = "수정";
+        $deleteBtn.innerHTML = "삭제";
+
+        $deleteBtn.addEventListener("click",deleteLocalStorage);
+        $modifyBtn.addEventListener("click",modifyLocalStorage);
+
+        $deleteBtn.className = `${obj.id} `
         $commentBox.append(`${obj.id} : ${obj.comment} `);
         $commentList.appendChild($commentBox);
 
         // 날짜부분 css 넣기 편하게 따로 빼놓음
         const $dateBox = document.createElement("span");
         $dateBox.id = "dateBox";
-        $dateBox.append(`[${obj.date}]`);
+        $dateBox.append(`${obj.date}`);
         $commentBox.appendChild($dateBox);
+
+        $commentBox.appendChild($modifyBtn);
+        $commentBox.appendChild($deleteBtn);
     });
 
     // submit 하게되면 validation check 비활성화
@@ -111,6 +128,40 @@ function getLocalStorage() {
 }
 getLocalStorage();
 
+// local storage 삭제버튼 클릭
+function deleteLocalStorage(event) {
+    const target = event.target.parentElement
+    
+    const checkPW = prompt("저장했던 비밀번호를 입력해주세요");
+    const localKey = localStorage.getItem(`${id},${target.children[0].innerText}`);
+
+    if (checkPW === JSON.parse(localKey).pw) {
+        localStorage.removeItem(`${id},${target.children[0].innerText}`);
+        target.remove();
+    } else {
+        alert("비밀번호가 일치하지 않습니다.");
+    }
+}
+
+//local storage 수정버튼 클릭
+function modifyLocalStorage(event) {
+    const target = event.target.parentElement
+    
+    const checkPW = prompt("저장했던 비밀번호를 입력해주세요");
+    const localKey = localStorage.getItem(`${id},${target.children[0].innerText}`);
+
+    if (checkPW === JSON.parse(localKey).pw) {
+        const modifyComment = prompt("수정할 내용을 입력해주세요")
+        const parsedLocalKey = JSON.parse(localKey);
+        parsedLocalKey.comment = modifyComment;
+        const stringfiedLocalKey = JSON.stringify(parsedLocalKey)
+        localStorage.setItem(`${id},${target.children[0].innerText}`,stringfiedLocalKey)
+
+        target.childNodes[0].nodeValue =`${parsedLocalKey.id} : ${modifyComment}`
+    } else {
+        alert("비밀번호가 일치하지 않습니다.");
+    }
+}
 
 
 // ID validation check
@@ -157,7 +208,7 @@ function idLength(idValue) {
 }
 
 // PW validation check
-$inputPW.addEventListener("input",PWvalidationCheck)
+$inputPW.addEventListener("input", PWvalidationCheck);
 let pwValue = $inputPW.value;
 $pwSuccessMessage.style.display = "none";
 $pwFailureMessage.style.display = "none";

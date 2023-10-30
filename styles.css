@@ -10,7 +10,11 @@
 html, body{
 	margin: 0 auto;
 	padding: 0;
+<<<<<<< HEAD
+	width: 80%
+=======
 	width : 80%
+>>>>>>> a947bcc762bb77bdd4b6b3bb7c271d5cf865faa7
 }
 #searchBar{
 	background-color: rgb(68,68,68);
@@ -19,7 +23,8 @@ html, body{
 	align-items: center;
 	justify-content: center;
 	height: 50px;
-	color : rgb(218,0,55)
+	color : rgb(218,0,55);
+	border-radius: 5px 5px 0 0;
 }
 
 #keyword{
@@ -67,6 +72,7 @@ button:hover{
 	color: white;
 	height: 30px;
 	padding-top: 5px;
+    border-radius: 0 0 5px 5px;
 }
 
 #pageBar{
